@@ -1,8 +1,10 @@
 /**
+@title 	freeRTOS_2core.ino
+@git  	https://github.com/infrapale/T2310_PicoRTOS
+
 https://circuitdigest.com/microcontroller-projects/arduino-freertos-tutorial1-creating-freertos-task-to-blink-led-in-arduino-uno
 
 https://circuitdigest.com/microcontroller-projects/arduino-freertos-tutorial-using-semaphore-and-mutex-in-freertos-with-arduino
-
 
  */
 #include <FreeRTOS.h>
@@ -19,12 +21,7 @@ void setup()
 {
   delay(2000);
   Serial.begin(115200);  
-}
 
-
-
-void setup1() 
-{
   mutex_v = xSemaphoreCreateMutex(); 
   if (mutex_v == NULL) 
   { 
@@ -33,6 +30,13 @@ void setup1()
   xTaskCreate(blink1,"BLINK1",128,nullptr,1,nullptr);
   xTaskCreate(blink2,"BLINK2",128,nullptr,1,nullptr);
   sema_v = xSemaphoreCreateBinary();
+  
+}
+
+
+
+void setup1() 
+{
 
   pinMode(LED_BUILTIN,OUTPUT);
 
